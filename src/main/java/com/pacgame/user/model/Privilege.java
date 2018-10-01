@@ -3,12 +3,13 @@ package com.pacgame.user.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table( name = "privilege" )
-public class Privilege implements AuthorityInterface {
+public class Privilege implements AuthorityInterface, Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

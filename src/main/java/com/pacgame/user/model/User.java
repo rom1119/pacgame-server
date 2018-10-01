@@ -8,6 +8,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ import java.util.Set;
 @NamedQuery(name="User.findAllWhereIsAsdInFirstName", query="SELECT u from User u left join u.userDetails ud where ud.firstName LIKE '%asd%'")
 //@JsonIgnoreProperties({"id", "firstName"})
 //@JsonPropertyOrder({ "name", "id" })
-public class User implements ResourceInterface {
+public class User implements ResourceInterface, Serializable {
 
     @Id
 //    @GeneratedValue(generator = "uuid")

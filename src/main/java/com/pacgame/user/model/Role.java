@@ -7,12 +7,13 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table( name = "role" )
-public class Role implements AuthorityInterface {
+public class Role implements AuthorityInterface, Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

@@ -9,10 +9,11 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Table( name = "user_details" )
-public class UserDetails implements ResourceInterface, FileInterface {
+public class UserDetails implements ResourceInterface, FileInterface, Serializable {
 
     @Id
 //    @GeneratedValue(generator = "uuid")
