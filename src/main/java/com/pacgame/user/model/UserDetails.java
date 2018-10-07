@@ -53,6 +53,7 @@ public class UserDetails implements ResourceInterface, FileInterface, Serializab
         this.lastName = lastName;
     }
 
+    @JsonIgnore()
     public Long getId() {
         return id;
     }
@@ -104,6 +105,7 @@ public class UserDetails implements ResourceInterface, FileInterface, Serializab
         this.fileName = fileName;
     }
 
+    @JsonIgnore()
     @Override
     public MultipartFile getFile() {
         return file;

@@ -48,6 +48,7 @@ public class Role implements AuthorityInterface, Serializable {
     }
 
     @Override
+    @JsonIgnore()
     public Long getId() {
         return id;
     }
@@ -92,6 +93,7 @@ public class Role implements AuthorityInterface, Serializable {
 
     }
 
+    @JsonIgnore()
     public Set<Privilege> getPrivileges() {
         return privileges;
     }

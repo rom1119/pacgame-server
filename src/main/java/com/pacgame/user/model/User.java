@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Entity
@@ -76,6 +77,7 @@ public class User implements ResourceInterface, Serializable {
         this.id = id;
     }
 
+    @JsonIgnore()
     public Long getVersion() {
         return version;
     }
@@ -101,6 +103,7 @@ public class User implements ResourceInterface, Serializable {
         this.email = email;
     }
 
+    @JsonIgnore()
     public boolean isEnabled() {
         return enabled;
     }
@@ -109,6 +112,7 @@ public class User implements ResourceInterface, Serializable {
         this.enabled = enabled;
     }
 
+    @JsonIgnore()
     public boolean isTokenExpired() {
         return tokenExpired;
     }
@@ -141,11 +145,20 @@ public class User implements ResourceInterface, Serializable {
 
     }
 
-//    @JsonIgnore
+    @JsonIgnore
     public Set<Role> getRoles()
     {
         return roles;
 
+    }
+
+    public String getUserRoles()
+    {
+        String rolesStr = roles.stream().map(e -> e.getName()).collect(
+            Collectors.joining(", ")
+        );
+
+        return rolesStr;
     }
 
     public UserDetails getUserDetails() {
