@@ -34,7 +34,7 @@ public class UserController {
         if (auth.getPrincipal() == null) {
             throw new ResourceNotFoundException("Resource not found");
         }
-        return Optional.ofNullable(userRepository.findByEmail(((CustomUserDetails)auth.getPrincipal()).getUser().getUsername()))
+        return Optional.ofNullable(userRepository.findByUsername(((CustomUserDetails)auth.getPrincipal()).getUser().getUsername()))
                 .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
     }
 

@@ -1,22 +1,15 @@
 package com.pacgame.user.service;
 
-import com.pacgame.user.exception.EmailExistsException;
-import com.pacgame.user.model.CustomUserDetails;
+import com.pacgame.user.exception.UsernameExistsException;
 import com.pacgame.user.model.User;
 import com.pacgame.user.model.UserDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PostFilter;
-
-import java.util.List;
-import java.util.Optional;
 
 public interface IUserService {
 
     User registerNewUserAccount(UserDto accountDto)
-            throws EmailExistsException;
+            throws UsernameExistsException;
 
     User changePassword(UserDto accountDto);
 

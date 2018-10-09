@@ -1,6 +1,6 @@
 package com.pacgame.user.service;
 
-import com.pacgame.user.exception.EmailExistsException;
+import com.pacgame.user.exception.UsernameExistsException;
 import com.pacgame.user.model.User;
 import com.pacgame.user.model.UserDetails;
 import com.pacgame.user.model.UserDto;
@@ -48,18 +48,18 @@ public class UserService implements IUserService {
     @Transactional
     @Override
     public User registerNewUserAccount(UserDto accountDto)
-            throws EmailExistsException {
+            throws UsernameExistsException {
 
-        if (emailExist(accountDto.getEmail())) {
-            throw new EmailExistsException(
+        if (usernameExist(accountDto.getUsername())) {
+            throw new UsernameExistsException(
                     "There is an account with that email adress: "
-                            +  accountDto.getEmail());
+                            +  accountDto.getUsername());
         }
 //        entityManager = emf.createEntityManager();
 
         User user = new User();
         user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        user.setUsername(accountDto.getEmail());
+        user.setUsername(accountDto.getUsername());
         user.setEnabled(true);
         user.addRole(roleRepository.findByName("ROLE_USER"));
 
@@ -132,8 +132,8 @@ public class UserService implements IUserService {
     }
 
 
-    private boolean emailExist(String email) {
-        User user = userRepository.findByEmail(email);
+    private boolean usernameExist(String email) {
+        User user = userRepository.findByUsername(email);
         if (user != null) {
             return true;
         }

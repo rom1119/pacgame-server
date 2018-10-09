@@ -25,7 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
             "LEFT JOIN u.userDetails ud " +
             "WHERE " +
                 " (" +
-                "LOWER(u.email) LIKE LOWER(CONCAT('%',:searchTerm, '%')) OR " +
+                "LOWER(u.username) LIKE LOWER(CONCAT('%',:searchTerm, '%')) OR " +
                 "LOWER(r.name) LIKE LOWER(CONCAT('%',:searchTerm, '%')) OR " +
                 "LOWER(ud.firstName) LIKE LOWER(CONCAT('%',:searchTerm, '%')) OR " +
                 "LOWER(ud.lastName) LIKE LOWER(CONCAT('%',:searchTerm, '%')) " +
@@ -33,7 +33,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     )
     Page<User> findAll(@Param("searchTerm") String searchTerm, Pageable pageable);
 
-    public User findByEmail(String email);
+    public User findByUsername(String username);
 
 
 

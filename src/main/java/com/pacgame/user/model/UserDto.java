@@ -34,7 +34,7 @@ public class UserDto implements Serializable {
 
     @NotNull(groups = {Registration.class})
     @NotEmpty(groups = {Registration.class})
-    private String email;
+    private String username;
 //    @Email
 
 //    private String fileName;
@@ -84,12 +84,12 @@ public class UserDto implements Serializable {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public boolean isEnabled() {
