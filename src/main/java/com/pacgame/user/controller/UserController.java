@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,7 +34,7 @@ public class UserController {
         if (auth.getPrincipal() == null) {
             throw new ResourceNotFoundException("Resource not found");
         }
-        return Optional.ofNullable(userRepository.findByEmail(((CustomUserDetails)auth.getPrincipal()).getUser().getEmail()))
+        return Optional.ofNullable(userRepository.findByEmail(((CustomUserDetails)auth.getPrincipal()).getUser().getUsername()))
                 .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
     }
 

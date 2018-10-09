@@ -121,7 +121,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //        builder.passwordEncoder(passwordEncoder());
 
 //        User user = new User();
-//        user.setEmail("rom@wp.pl");
+//        user.setUsername("rom@wp.pl");
 //        user.setPassword(passwordEncoder().encode("asdasd"));
 //        user.setEnabled(true);
 //

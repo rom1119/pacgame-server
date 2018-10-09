@@ -36,7 +36,7 @@ public class User implements ResourceInterface, Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    private String email;
+    private String username;
 
     private boolean enabled;
 
@@ -59,10 +59,10 @@ public class User implements ResourceInterface, Serializable {
         setRoles(new HashSet<Role>());
     }
 
-    public User(String email, String password, boolean enabled, UserDetails userDetails, Set<Role> roles) {
+    public User(String username, String password, boolean enabled, UserDetails userDetails, Set<Role> roles) {
         this();
         this.password = password;
-        this.email = email;
+        this.username = username;
         this.enabled = enabled;
         setUserDetails(userDetails);
         setRoles(roles);
@@ -95,12 +95,12 @@ public class User implements ResourceInterface, Serializable {
         this.password = password;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @JsonIgnore()

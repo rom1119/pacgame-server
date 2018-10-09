@@ -19,7 +19,6 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class UserService implements IUserService {
@@ -60,7 +59,7 @@ public class UserService implements IUserService {
 
         User user = new User();
         user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        user.setEmail(accountDto.getEmail());
+        user.setUsername(accountDto.getEmail());
         user.setEnabled(true);
         user.addRole(roleRepository.findByName("ROLE_USER"));
 

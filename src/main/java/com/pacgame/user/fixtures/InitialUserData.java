@@ -8,7 +8,6 @@ import com.pacgame.user.repository.PrivilegeRepository;
 import com.pacgame.user.repository.RoleRepository;
 import com.pacgame.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -89,7 +88,7 @@ public class InitialUserData {
 
         User sadmin = new User();
         sadmin.setPassword(passwordEncoder().encode("test"));
-        sadmin.setEmail("sadm");
+        sadmin.setUsername("sadm");
         sadmin.addRole(superAdminRole);
         sadmin.addRole(adminRole);
         sadmin.addRole(userRole);
@@ -106,7 +105,7 @@ public class InitialUserData {
 
         User admin = new User();
         admin.setPassword(passwordEncoder().encode("test"));
-        admin.setEmail("adm");
+        admin.setUsername("adm");
         admin.addRole(adminRole);
         admin.addRole(userRole);
         admin.setEnabled(true);
@@ -122,7 +121,7 @@ public class InitialUserData {
 
         User user = new User();
         user.setPassword(passwordEncoder().encode("test"));
-        user.setEmail("use");
+        user.setUsername("use");
         user.addRole(userRole);
         user.setEnabled(true);
 
@@ -150,7 +149,7 @@ public class InitialUserData {
     {
         User admin = new User();
         admin.setPassword(passwordEncoder().encode("test"));
-        admin.setEmail("adm" + i);
+        admin.setUsername("adm" + i);
         admin.addRole(role);
         admin.setEnabled(true);
 
@@ -171,7 +170,7 @@ public class InitialUserData {
     {
         User user = new User();
         user.setPassword(passwordEncoder().encode("test"));
-        user.setEmail("use" + i);
+        user.setUsername("use" + i);
         user.addRole(role);
         user.setEnabled(true);
 
