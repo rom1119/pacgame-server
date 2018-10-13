@@ -95,7 +95,7 @@ public class InitialUserData {
         sadmin.setEnabled(true);
 
         UserDetails userDetailsSuperAdmin = new UserDetails();
-        userDetailsSuperAdmin.setScore(0);
+        userDetailsSuperAdmin.setScore(11 * 9);
         userDetailsSuperAdmin.setFirstName("super_admin");
         userDetailsSuperAdmin.setLastName("super_admin");
 
@@ -111,7 +111,7 @@ public class InitialUserData {
         admin.setEnabled(true);
 
         UserDetails userDetailsAdmin = new UserDetails();
-        userDetailsAdmin.setScore(0);
+        userDetailsAdmin.setScore(11 * 7);
         userDetailsAdmin.setFirstName("admin");
         userDetailsAdmin.setLastName("admin");
 
@@ -126,7 +126,7 @@ public class InitialUserData {
         user.setEnabled(true);
 
         UserDetails userDetailsUsr = new UserDetails();
-        userDetailsUsr.setScore(0);
+        userDetailsUsr.setScore(11 * 2);
         userDetailsUsr.setFirstName("user");
         userDetailsUsr.setLastName("user");
 
@@ -154,7 +154,7 @@ public class InitialUserData {
         admin.setEnabled(true);
 
         UserDetails userDetailsAdmin = new UserDetails();
-        userDetailsAdmin.setScore(0);
+        userDetailsAdmin.setScore(i + 11 * 5);
         userDetailsAdmin.setFirstName("admin" + i);
         userDetailsAdmin.setLastName("admin" + i);
 
@@ -175,7 +175,7 @@ public class InitialUserData {
         user.setEnabled(true);
 
         UserDetails userDetails = new UserDetails();
-        userDetails.setScore(0);
+        userDetails.setScore(i + 11 * 5);
         userDetails.setFirstName("user" + i);
         userDetails.setLastName("user" + i);
 

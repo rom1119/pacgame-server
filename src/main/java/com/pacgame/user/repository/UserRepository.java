@@ -35,6 +35,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     public User findByUsername(String username);
 
+    @Query(
+            "SELECT u FROM User u " +
+            "JOIN u.userDetails ud " +
+                    "WHERE ud.score IS NOT NULL " +
+                    "ORDER BY ud.score DESC"
+
+    )
+    List<User> findAllOrderByScoreDesc();
+
 
 
 }

@@ -19,17 +19,11 @@ public class OldPasswordConstraintValidator implements ConstraintValidator<Valid
     @Autowired
     private UserRepository userRepository;
 
-    public static HashMap<String, String> errors = new HashMap<>();
-
     String oldPasswordField;
     String passwordField;
     String confirmPasswordField;
+    private String errorMessage;
 
-    private void initErrors()
-    {
-        errors.put("oldPass", "Hasło niepoprawne");
-        errors.put("confPass", "Wpisz dwa razy to samo hasło");
-    }
 
     @Override
     public void initialize(final ValidChangePassword constraintAnnotation)
@@ -37,8 +31,9 @@ public class OldPasswordConstraintValidator implements ConstraintValidator<Valid
         oldPasswordField = constraintAnnotation.oldPasswordField();
         passwordField = constraintAnnotation.passwordField();
         confirmPasswordField = constraintAnnotation.confirmPasswordField();
+        errorMessage = constraintAnnotation.message();
 
-        initErrors();
+
     }
 
     @Override
@@ -72,7 +67,7 @@ public class OldPasswordConstraintValidator implements ConstraintValidator<Valid
         if ( !passwordEncoder.matches(oldPass, user.getPassword())) {
 //                context.disableDefaultConstraintViolation();
                 //In the initialiaze method you get the errorMessage: constraintAnnotation.message();
-                context.buildConstraintViolationWithTemplate(errors.get("oldPass")).addNode(oldPasswordField).addConstraintViolation();
+                context.buildConstraintViolationWithTemplate(errorMessage).addNode(oldPasswordField).addConstraintViolation();
                 return false;
         }
 

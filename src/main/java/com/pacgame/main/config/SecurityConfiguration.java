@@ -57,19 +57,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-//        super.configure(http);
-        http
-                .authorizeRequests()
-
-                .antMatchers("/").permitAll()
-                .antMatchers("/static/**").permitAll()
-                .antMatchers("/api/**").authenticated()
-                .and()
-                .logout()
-                .logoutUrl("/oauth/token").permitAll()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
+        super.configure(http);
+//        http
+//                .authorizeRequests()
+//
+//                .antMatchers("/api/register").permitAll()
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/static/**").permitAll()
+//                .antMatchers("/api/**").authenticated()
+//                .and()
+//                .logout()
+//                .logoutUrl("/oauth/token").permitAll()
+//                .and()
+//                .sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().csrf().disable();
 
 //                .and()
 //                .csrf()
@@ -88,7 +91,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 //                .logoutSuccessUrl("/logout_success")
 //                .permitAll()
-                    ;
+//                    ;
 
 //        http.anonymous().authorities()
 //        http.csrf().disable();

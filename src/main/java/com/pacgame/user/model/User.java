@@ -4,10 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.pacgame.main.model.ResourceInterface;
+import com.pacgame.main.validation.FieldMatch;
+import com.pacgame.main.validation.UniqueUsername;
+import com.pacgame.main.validation.ValidChangePassword;
+import com.pacgame.main.validation.group.PasswordChange;
+import com.pacgame.main.validation.group.Registration;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +29,8 @@ import java.util.stream.Collectors;
 @NamedQuery(name="User.findAllWhereIsAsdInFirstName", query="SELECT u from User u left join u.userDetails ud where ud.firstName LIKE '%asd%'")
 //@JsonIgnoreProperties({"id", "firstName"})
 //@JsonPropertyOrder({ "name", "id" })
+@FieldMatch(first = "password", second = "confirmPassword", message = "{validation.user.fieldMatch}", groups = {Registration.class, PasswordChange.class})
+@ValidChangePassword(oldPasswordField = "oldPassword", passwordField = "password", confirmPasswordField = "confirmPassword", groups = {PasswordChange.class})
 public class User implements ResourceInterface, Serializable {
 
     @Id
@@ -33,19 +43,36 @@ public class User implements ResourceInterface, Serializable {
     @Version
     private Long version;
 
+    @Transient
+    @NotEmpty(groups = {PasswordChange.class})
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
+    private String oldPassword;
+
+    @NotEmpty(groups = {Registration.class}, message = "{validation.user.password.notEmpty}")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    @Transient
+    @NotEmpty(groups = {Registration.class, PasswordChange.class}, message = "{validation.user.confirmPassword.notEmpty}")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String confirmPassword;
+
+    @NotEmpty(groups = {Registration.class} ,message = "{validation.user.username.notEmpty}")
+    @UniqueUsername(groups = {Registration.class}, message = "{validation.user.username.unique}")
     private String username;
 
+    @NotNull
     private boolean enabled;
 
     private boolean tokenExpired;
 
+    @Valid
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,
             fetch = FetchType.EAGER, optional = false, orphanRemoval = true)
     private UserDetails userDetails;
 
+    @NotEmpty
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
     @JoinTable(
@@ -86,7 +113,6 @@ public class User implements ResourceInterface, Serializable {
         this.version = version;
     }
 
-    @JsonIgnore()
     public String getPassword() {
         return password;
     }
@@ -170,4 +196,19 @@ public class User implements ResourceInterface, Serializable {
         userDetails.setUser(this);
     }
 
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
 }

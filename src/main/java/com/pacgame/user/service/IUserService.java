@@ -8,8 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface IUserService {
 
-    User registerNewUserAccount(UserDto accountDto)
-            throws UsernameExistsException;
+    User createNewUserAccount(User accountUser);
 
     User changePassword(UserDto accountDto);
 

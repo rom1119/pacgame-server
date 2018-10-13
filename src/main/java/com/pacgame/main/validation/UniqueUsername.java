@@ -11,17 +11,14 @@ import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Documented
-@Constraint(validatedBy = OldPasswordConstraintValidator.class)
-@Target({ TYPE, FIELD, ANNOTATION_TYPE })
+@Target({TYPE, ANNOTATION_TYPE, FIELD})
 @Retention(RUNTIME)
-public @interface ValidChangePassword {
+@Constraint(validatedBy = UniqueUsernameValidator.class)
+@Documented
+public @interface UniqueUsername {
+    String message() default "{constraints.uniqueUsername}";
 
-    String message() default "Invalid old Password";
     Class<?>[] groups() default {};
-    Class<? extends Payload>[] payload() default {};
 
-    String oldPasswordField() ;
-    String passwordField() ;
-    String confirmPasswordField() ;
+    Class<? extends Payload>[] payload() default {};
 }

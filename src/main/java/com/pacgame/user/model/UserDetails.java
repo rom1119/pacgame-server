@@ -22,8 +22,8 @@ public class UserDetails implements ResourceInterface, FileInterface, Serializab
     @Column(name = "id", unique = true)
     private Long id;
 
-    @NotNull(groups = {Registration.class})
-    @NotEmpty(groups = {Registration.class})
+//    @NotNull(groups = {Registration.class})
+//    @NotEmpty(groups = {Registration.class})
     private String firstName;
 
     @NotNull(groups = {Registration.class})
@@ -78,6 +78,7 @@ public class UserDetails implements ResourceInterface, FileInterface, Serializab
     public void setUser(User user) {
         this.user = user;
     }
+
 
     public String getFirstName() {
         return firstName;

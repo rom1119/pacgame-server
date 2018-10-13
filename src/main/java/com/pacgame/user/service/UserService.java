@@ -45,32 +45,27 @@ public class UserService implements IUserService {
 //    }
 
 
-    @Transactional
     @Override
-    public User registerNewUserAccount(UserDto accountDto)
-            throws UsernameExistsException {
+    @Transactional
+    public User createNewUserAccount(User accountUser)
+    {
 
-        if (usernameExist(accountDto.getUsername())) {
-            throw new UsernameExistsException(
-                    "There is an account with that email adress: "
-                            +  accountDto.getUsername());
-        }
 //        entityManager = emf.createEntityManager();
 
         User user = new User();
-        user.setPassword(passwordEncoder.encode(accountDto.getPassword()));
-        user.setUsername(accountDto.getUsername());
+        user.setPassword(passwordEncoder.encode(accountUser.getPassword()));
+        user.setUsername(accountUser.getUsername());
         user.setEnabled(true);
         user.addRole(roleRepository.findByName("ROLE_USER"));
 
-        UserDetails userDetailsAdmin = new UserDetails();
-        userDetailsAdmin.setScore(0);
-        userDetailsAdmin.setFirstName(accountDto.getUserDetails().getFirstName());
-        userDetailsAdmin.setLastName(accountDto.getUserDetails().getLastName());;
+        UserDetails userDetails = new UserDetails();
+        userDetails.setScore(0);
+//        userDetails.setFirstName(accountUser.getUserDetails().getFirstName());
+//        userDetails.setLastName(accountUser.getUserDetails().getLastName());;
 
-        userDetailsAdmin.setUser(user);
+        user.setUserDetails(userDetails);
 
-        userDetailsRepository.save(userDetailsAdmin);
+//        userDetailsRepository.save(userDetailsAdmin);
         userRepository.save(user);
 
         return user;

@@ -28,20 +28,10 @@ public class UserController {
                 .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
     }
 
-    @GetMapping("/logged_user")
-    public User getLoggedUser( Authentication auth) {
-        System.out.println(auth.getPrincipal());
-        if (auth.getPrincipal() == null) {
-            throw new ResourceNotFoundException("Resource not found");
-        }
-        return Optional.ofNullable(userRepository.findByUsername(((CustomUserDetails)auth.getPrincipal()).getUser().getUsername()))
-                .orElseThrow(() -> new ResourceNotFoundException("Resource not found"));
-    }
-
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<User>> getAll()
     {
-        List<User> all = userRepository.findAll();
+        List<User> all = userRepository.findAllOrderByScoreDesc();
 
         return ResponseEntity.ok(all);
     }

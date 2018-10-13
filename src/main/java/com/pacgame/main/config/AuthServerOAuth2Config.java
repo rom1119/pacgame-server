@@ -106,4 +106,6 @@ public class AuthServerOAuth2Config extends AuthorizationServerConfigurerAdapter
         populator.addScript(schemaScript);
         return populator;
     }
+
+
 }

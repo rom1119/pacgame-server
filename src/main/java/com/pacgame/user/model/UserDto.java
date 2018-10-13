@@ -1,6 +1,7 @@
 package com.pacgame.user.model;
 
 import com.pacgame.main.validation.FieldMatch;
+import com.pacgame.main.validation.UniqueUsername;
 import com.pacgame.main.validation.ValidChangePassword;
 import com.pacgame.main.validation.group.PasswordChange;
 import com.pacgame.main.validation.group.Registration;
@@ -34,6 +35,7 @@ public class UserDto implements Serializable {
 
     @NotNull(groups = {Registration.class})
     @NotEmpty(groups = {Registration.class})
+    @UniqueUsername(groups = {Registration.class})
     private String username;
 //    @Email
 
