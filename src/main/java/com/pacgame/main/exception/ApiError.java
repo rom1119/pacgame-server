@@ -35,7 +35,7 @@ public class ApiError {
         this.errors = new ArrayList<>();
         errors.stream().forEach(el -> {
             ApiValidationError apiSubError = new ApiValidationError();
-            apiSubError.setObject(el.getObjectName());
+            apiSubError.setObjectName(el.getObjectName());
             apiSubError.setMessage(el.getDefaultMessage());
             apiSubError.setRejectedValue(el.getCode());
             apiSubError.setField(el.getField());

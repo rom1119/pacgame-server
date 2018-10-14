@@ -1,18 +1,18 @@
 package com.pacgame.main.exception;
 
 public class ApiValidationError extends ApiSubError {
-    private String object;
+    private String objectName;
     private String field;
     private Object rejectedValue;
     private String message;
 
-    ApiValidationError(String object, String message) {
-        this.object = object;
+    ApiValidationError(String objectName, String message) {
+        this.objectName = objectName;
         this.message = message;
     }
 
-    public ApiValidationError(String object, String field, Object rejectedValue, String message) {
-        this.object = object;
+    public ApiValidationError(String objectName, String field, Object rejectedValue, String message) {
+        this.objectName = objectName;
         this.field = field;
         this.rejectedValue = rejectedValue;
         this.message = message;
@@ -21,12 +21,12 @@ public class ApiValidationError extends ApiSubError {
     public ApiValidationError() {
     }
 
-    public String getObject() {
-        return object;
+    public String getObjectName() {
+        return objectName;
     }
 
-    public void setObject(String object) {
-        this.object = object;
+    public void setObjectName(String objectName) {
+        this.objectName = objectName;
     }
 
     public String getField() {
