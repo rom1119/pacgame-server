@@ -72,7 +72,7 @@ public class SecurityController {
 
         User newUserAccount = service.createNewUserAccount(user);
 
-        return ResponseEntity.ok(newUserAccount);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUserAccount);
 
     }
 

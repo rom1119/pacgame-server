@@ -50,7 +50,7 @@ public class ImageValidator implements ConstraintValidator<Image, Object>
         context.disableDefaultConstraintViolation();
 
         if (!mimeTypeFileIsCorrect(multipartFile)) {
-            context.buildConstraintViolationWithTemplate("validation.user.file.mimeType").addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("{validation.user.file.mimeType}").addConstraintViolation();
             return false;
         }
 
@@ -62,27 +62,27 @@ public class ImageValidator implements ConstraintValidator<Image, Object>
         }
 
         if (!sizeCorrect(multipartFile)) {
-            context.buildConstraintViolationWithTemplate("validation.user.file.size").addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("{validation.user.file.size}").addConstraintViolation();
             return false;
         }
 
         if (!maxHeightCorrect(image)) {
-            context.buildConstraintViolationWithTemplate("validation.user.file.maxHeight").addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("{validation.user.file.maxHeight}").addConstraintViolation();
             return false;
         }
 
         if (!minHeightCorrect(image)) {
-            context.buildConstraintViolationWithTemplate("validation.user.file.minHeight").addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("{validation.user.file.minHeight}").addConstraintViolation();
             return false;
         }
 
         if (!maxWidthCorrect(image)) {
-            context.buildConstraintViolationWithTemplate("validation.user.file.maxWidth").addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("{validation.user.file.maxWidth}").addConstraintViolation();
             return false;
         }
 
         if (!minWidthCorrect(image)) {
-            context.buildConstraintViolationWithTemplate("validation.user.file.minWidth").addConstraintViolation();
+            context.buildConstraintViolationWithTemplate("{validation.user.file.minWidth}").addConstraintViolation();
             return false;
         }
 
@@ -95,7 +95,10 @@ public class ImageValidator implements ConstraintValidator<Image, Object>
 
     private boolean mimeTypeFileIsCorrect(MultipartFile multipartFile) {
 
+//        System.out.println(multipartFile.getContentType());
         for (int i = 0; i < mimeTypes.length; i++) {
+//            System.out.println(mimeTypes[i].mimeType);
+
             if (mimeTypes[i].mimeType.equals(multipartFile.getContentType())) {
                 return true;
             }

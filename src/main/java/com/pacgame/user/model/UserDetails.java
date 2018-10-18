@@ -1,8 +1,10 @@
 package com.pacgame.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pacgame.main.model.ResourceInterface;
 import com.pacgame.main.validation.Image;
+import com.pacgame.main.validation.group.FileValidationGroup;
 import com.pacgame.main.validation.group.Registration;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,19 +24,21 @@ public class UserDetails implements ResourceInterface, FileInterface, Serializab
     @Column(name = "id", unique = true)
     private Long id;
 
-//    @NotNull(groups = {Registration.class})
-//    @NotEmpty(groups = {Registration.class})
+    @NotNull()
+    @NotEmpty()
     private String firstName;
 
-    @NotNull(groups = {Registration.class})
-    @NotEmpty(groups = {Registration.class})
+    @NotNull()
+    @NotEmpty()
     private String lastName;
 
     @Column(name = "file_name")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String fileName;
 
     @Transient
-    @Image(maxHeight = 1000, maxWidth = 1000)
+    @Image(maxHeight = 1000, maxWidth = 1000, groups = {FileValidationGroup.class})
+    @NotNull(groups = {FileValidationGroup.class})
     private MultipartFile file;
 
     @OneToOne( fetch = FetchType.LAZY)
@@ -42,6 +46,7 @@ public class UserDetails implements ResourceInterface, FileInterface, Serializab
     private User user;
 
     @Column
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int score;
 
     public UserDetails() {

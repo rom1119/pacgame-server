@@ -1,5 +1,7 @@
 package com.pacgame.user.service;
 
+import com.pacgame.main.service.StorageManager;
+import com.pacgame.main.service.StorageService;
 import com.pacgame.user.exception.UsernameExistsException;
 import com.pacgame.user.model.User;
 import com.pacgame.user.model.UserDetails;
@@ -13,9 +15,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -38,7 +42,8 @@ public class UserService implements IUserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    private EntityManager entityManager;
+    @Autowired
+    private StorageService storageService;
 
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
@@ -72,6 +77,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public User changePassword(UserDto accountDto) {
 
         User user = userRepository.findById(accountDto.getId()).get();
@@ -83,6 +89,7 @@ public class UserService implements IUserService {
     }
 
     @Override
+    @Transactional
     public User updateUser(User userDb, UserDto userDto) throws Exception {
 
         User user = modelMapper.map(userDto, User.class);
@@ -113,6 +120,40 @@ public class UserService implements IUserService {
     public Page<User> findBySearchTerm(String term, Pageable pageable) {
         return userRepository.findAll(term, pageable);
 
+    }
+
+    @Override
+    public User findByIdToEdit(Long id) {
+        return findOne(id);
+    }
+
+    @Override
+    @Transactional
+    public UserDetails updateUserDetails(UserDetails userDetails, UserDetails userDetailsDto) throws IOException {
+
+        userDetails.setFirstName(userDetailsDto.getFirstName());
+        userDetails.setLastName(userDetailsDto.getLastName());
+        userDetails.setFile(userDetailsDto.getFile());
+
+        userDetailsRepository.save(userDetails);
+
+        return userDetails;
+    }
+
+    @Override
+    @Transactional
+    public String updateImage(UserDetails userDetails, MultipartFile multipartFile) throws IOException {
+
+        String filename = null;
+        if (!multipartFile.isEmpty()) {
+            userDetails.setFile(multipartFile);
+            filename = storageService.updateFile(userDetails);
+
+            userDetailsRepository.save(userDetails);
+
+        }
+
+        return filename;
     }
 
 
