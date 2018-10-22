@@ -133,7 +133,7 @@ public class UserService implements IUserService {
 
         userDetails.setFirstName(userDetailsDto.getFirstName());
         userDetails.setLastName(userDetailsDto.getLastName());
-        userDetails.setFile(userDetailsDto.getFile());
+//        userDetails.setFile(userDetailsDto.getFile());
 
         userDetailsRepository.save(userDetails);
 
