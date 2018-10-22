@@ -1,17 +1,26 @@
 
 this application is server part of pacgame app
 
-open project in IDE eg IntelliJ IDEA
-move to src/main/resources
-open file application.properties
-set your parameters to database connection
-change your directory to save all application files eg images users in parameter "app.fileUpload.folder"
-move to root dir project
-set main class in configuration to "com.example.demo.DemoApplication"
-run your app
+1. open project in IDE eg IntelliJ IDEA
+
+2. move to src/main/resources
+
+3. open file application.properties
+
+4. set your parameters to database connection
+
+5. change your directory to save all application files eg images users in parameter "app.fileUpload.folder"
+
+6. move to root dir project
+
+7. set main class in configuration to "com.example.demo.DemoApplication"
+
+8. run your app
 
 Example users
 
-login: 'sadm' , password: 'test', role: 'SUPER_ADMIN'
-login: 'adm' , password: 'test', role: 'ADMIN'
-login: 'use' , password: 'test', role: 'USER'
+1. login: 'sadm' , password: 'test', role: 'SUPER_ADMIN'
+
+2. login: 'adm' , password: 'test', role: 'ADMIN'
+
+3. login: 'use' , password: 'test', role: 'USER'
