@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.pacgame.main.model.ResourceInterface;
 import com.pacgame.main.validation.Image;
+import com.pacgame.main.validation.group.Edited;
 import com.pacgame.main.validation.group.FileValidationGroup;
 import com.pacgame.main.validation.group.Registration;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,12 +25,12 @@ public class UserDetails implements ResourceInterface, FileInterface, Serializab
     @Column(name = "id", unique = true)
     private Long id;
 
-    @NotNull()
-    @NotEmpty()
+    @NotNull(groups = Edited.class)
+    @NotEmpty(groups = Edited.class)
     private String firstName;
 
-    @NotNull()
-    @NotEmpty()
+    @NotNull(groups = Edited.class)
+    @NotEmpty(groups = Edited.class)
     private String lastName;
 
     @Column(name = "file_name")

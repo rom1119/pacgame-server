@@ -3,6 +3,7 @@ package com.pacgame.user.controller;
 import com.pacgame.main.exception.ApiError;
 import com.pacgame.main.exception.ResourceNotFoundException;
 import com.pacgame.main.service.StorageService;
+import com.pacgame.main.validation.group.Edited;
 import com.pacgame.user.model.CustomUserDetails;
 import com.pacgame.user.model.User;
 import com.pacgame.user.model.UserDetails;
@@ -18,6 +19,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.header.Header;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,7 +59,7 @@ public class UserController {
     @PutMapping( path = "/{id}")
     public ResponseEntity update(
                             @PathVariable final Long id,
-                             @RequestBody @Valid UserDetails userDetails,
+                             @RequestBody @Validated(Edited.class) UserDetails userDetails,
 //                                 @RequestPart( "imageFile") MultipartFil imageFile,
                             BindingResult bindingResult
                  ) throws Exception {
